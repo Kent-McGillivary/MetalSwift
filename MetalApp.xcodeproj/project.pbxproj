@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D6147A84204A6D1D002907FF /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6147A83204A6D1D002907FF /* MetalKit.framework */; };
+		D6A9EACB204B68FA008C0174 /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = D6A9EACA204B68FA008C0174 /* Shaders.metal */; };
+		D6A9EAD4204F9F5B008C0174 /* Renderer2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A9EAD3204F9F5B008C0174 /* Renderer2D.swift */; };
+		D6A9EAD62053A5F5008C0174 /* MathUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A9EAD52053A5F5008C0174 /* MathUtils.swift */; };
+		D6A9EAD820542929008C0174 /* Render3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A9EAD720542929008C0174 /* Render3D.swift */; };
 		D6F53AB12046709A0064100F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F53AB02046709A0064100F /* AppDelegate.swift */; };
 		D6F53AB32046709A0064100F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F53AB22046709A0064100F /* ViewController.swift */; };
 		D6F53AB52046709A0064100F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6F53AB42046709A0064100F /* Assets.xcassets */; };
@@ -14,6 +19,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D6147A83204A6D1D002907FF /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
+		D6A9EACA204B68FA008C0174 /* Shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
+		D6A9EAD3204F9F5B008C0174 /* Renderer2D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer2D.swift; sourceTree = "<group>"; };
+		D6A9EAD52053A5F5008C0174 /* MathUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathUtils.swift; sourceTree = "<group>"; };
+		D6A9EAD720542929008C0174 /* Render3D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Render3D.swift; sourceTree = "<group>"; };
 		D6F53AAD2046709A0064100F /* MetalApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetalApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6F53AB02046709A0064100F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D6F53AB22046709A0064100F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -28,17 +38,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6147A84204A6D1D002907FF /* MetalKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D6147A82204A6D1C002907FF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D6147A83204A6D1D002907FF /* MetalKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D6F53AA42046709A0064100F = {
 			isa = PBXGroup;
 			children = (
 				D6F53AAF2046709A0064100F /* MetalApp */,
 				D6F53AAE2046709A0064100F /* Products */,
+				D6147A82204A6D1C002907FF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -59,6 +79,10 @@
 				D6F53AB62046709A0064100F /* Main.storyboard */,
 				D6F53AB92046709A0064100F /* Info.plist */,
 				D6F53ABA2046709A0064100F /* MetalApp.entitlements */,
+				D6A9EACA204B68FA008C0174 /* Shaders.metal */,
+				D6A9EAD3204F9F5B008C0174 /* Renderer2D.swift */,
+				D6A9EAD52053A5F5008C0174 /* MathUtils.swift */,
+				D6A9EAD720542929008C0174 /* Render3D.swift */,
 			);
 			path = MetalApp;
 			sourceTree = "<group>";
@@ -95,6 +119,7 @@
 				TargetAttributes = {
 					D6F53AAC2046709A0064100F = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -134,8 +159,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6A9EACB204B68FA008C0174 /* Shaders.metal in Sources */,
 				D6F53AB32046709A0064100F /* ViewController.swift in Sources */,
+				D6A9EAD4204F9F5B008C0174 /* Renderer2D.swift in Sources */,
 				D6F53AB12046709A0064100F /* AppDelegate.swift in Sources */,
+				D6A9EAD820542929008C0174 /* Render3D.swift in Sources */,
+				D6A9EAD62053A5F5008C0174 /* MathUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,6 +292,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MetalApp/MetalApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -270,6 +300,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Kent.MetalApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "MetalApp/MetalApp-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
@@ -278,6 +310,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MetalApp/MetalApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -285,6 +318,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Kent.MetalApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "MetalApp/MetalApp-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 			};
 			name = Release;

@@ -7,20 +7,44 @@
 //
 
 import Cocoa
+import Metal
+
+import MetalKit
+
+import simd
+
+
+
+
 
 class ViewController: NSViewController {
-
+    
+    let vertexData:[Float] = [
+        0.0, 1.0, 0.0,
+        -1.0, -1.0, 0.0,
+        1.0, -1.0, 0.0]
+    
+    let device = MTLCreateSystemDefaultDevice()!
+    var renderer: Renderer2D!
+  
+    @IBOutlet var mtkView: MTKView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    
+        mtkView.translatesAutoresizingMaskIntoConstraints = false
+        mtkView.device = device
+        mtkView.colorPixelFormat = .bgra8Unorm
+        renderer = Renderer2D(view: mtkView, device: device)
+        mtkView.delegate = renderer
+        
     }
+    
+    
 
-    override var representedObject: Any? {
-        didSet {
-        // Update the view, if already loaded.
-        }
-    }
+
+  
 
 
 }
