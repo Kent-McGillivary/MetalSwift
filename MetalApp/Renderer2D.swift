@@ -17,22 +17,13 @@ class Renderer2D: NSObject, MTKViewDelegate {
     let commandQueue: MTLCommandQueue
     
     var targets: [MTLTexture] = []
-    var vertexData: [Float]?
-    var vertexBuffer: MTLBuffer?
-    var uniformBuffer: MTLBuffer!
+    var vertexBuffer: MTLBuffer
+    var uniformBuffer: MTLBuffer
     let renderPipelineState: MTLRenderPipelineState
     
     init?(view: MTKView, device: MTLDevice) {
         self.view = view
-        // Use 4x MSAA multisampling
-        view.sampleCount = 4
-        // Clear to solid white
-        view.clearColor = MTLClearColorMake(0, 0, 0, 1) //This sets the background.  With 0,0,0 it is black.  1,1,1 would be white.
-        // Use a BGRA 8-bit normalized texture for the drawable
-        view.colorPixelFormat = .bgra8Unorm
-        // Use a 32-bit depth buffer
-        view.depthStencilPixelFormat = .depth32Float
-        
+     
         // Ask for the default Metal device; this represents our GPU.
         if let defaultDevice = MTLCreateSystemDefaultDevice() {
             self.device = defaultDevice
@@ -52,9 +43,16 @@ class Renderer2D: NSObject, MTKViewDelegate {
             print("Unable to compile render pipeline state")
             return nil
         }
+        let item = Renderer2D.createBuffer(device:device)
+        if let vertexBuffer = item.vertexBuffer, let uniformBuffer = item.uniformBuffer {
+            self.vertexBuffer = vertexBuffer;
+            self.uniformBuffer = uniformBuffer;
+        }
+        else  {
+            return nil;
+        }
+      
         super.init()
-       
-        self.createBuffer()
         
     }
     
@@ -78,26 +76,32 @@ class Renderer2D: NSObject, MTKViewDelegate {
         return try device.makeRenderPipelineState(descriptor: pipelineDescriptor)
     }
     
-    func createBuffer() {
+    static func createBuffer(device:MTLDevice) ->(vertexBuffer:MTLBuffer?, uniformBuffer:MTLBuffer?) {
          let vertex_data = [Vertex(position: [0.0, 0.75, 0.0, 1.0], color: [1, 0, 0, 1]),
                            Vertex(position: [ -0.75, -0.75, 0.0, 1.0], color: [0, 1, 0, 1]),
                            Vertex(position: [ 0.75, -0.75, 0.0, 1.0], color: [0, 0, 1, 1])
         ]
-        vertexBuffer = device.makeBuffer(bytes: vertex_data, length: MemoryLayout<Vertex>.size * 3, options:[])
-        uniformBuffer = device.makeBuffer(length: MemoryLayout<Float>.size * 16, options: [])
-        let bufferPointer = uniformBuffer.contents()
-        memcpy(bufferPointer, Matrix().modelMatrix(Matrix()).m, MemoryLayout<Float>.size * 16)
+        
+       
+        if let uniformBuffer = device.makeBuffer(length: MemoryLayout<Float>.size * 16, options: []),
+            let vertexBuffer = device.makeBuffer(bytes: vertex_data, length: MemoryLayout<Vertex>.size * 3, options:[]) {
+         
+            let bufferPointer =  uniformBuffer.contents()
+            memcpy(bufferPointer, Matrix().modelMatrix(Matrix()).m, MemoryLayout<Float>.size * 16)
+            return  (vertexBuffer,uniformBuffer)
+        }
+        else {
+            return (nil,nil)
+        }
     }
     
     func draw(in view: MTKView) {
         
-        if let commandBuffer = commandQueue.makeCommandBuffer() {
+        // Ask the view for a configured render pass descriptor. It will have a loadAction of
+        // MTLLoadActionClear and have the clear color of the drawable set to our desired clear color.
+        
+        if let commandBuffer = commandQueue.makeCommandBuffer(), let renderPassDescriptor = view.currentRenderPassDescriptor  {
             
-            // Ask the view for a configured render pass descriptor. It will have a loadAction of
-            // MTLLoadActionClear and have the clear color of the drawable set to our desired clear color.
-            let renderPassDescriptor = view.currentRenderPassDescriptor
-            
-            if let renderPassDescriptor = renderPassDescriptor {
                 //Create a render encoder to clear the screen and draw our objects
                 if let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor:renderPassDescriptor) {
                     
@@ -113,18 +117,8 @@ class Renderer2D: NSObject, MTKViewDelegate {
                     }
                     
                     commandBuffer.commit()
-                    
                 }
-                
-            }
-            
         }
-        
-       
-        
-        
-       
-      
     }
     
     func makeOffscreenTargets(_ size: CGSize) {
