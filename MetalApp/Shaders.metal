@@ -9,7 +9,12 @@
 #include <metal_stdlib>
 using namespace metal;
 
-struct Vertex {
+struct VertexIn {
+    float4 position;
+    float4 color;
+};
+
+struct VertexOut {
     float4 position [[position]];
     float4 color;
 };
@@ -18,17 +23,14 @@ struct Uniforms {
     float4x4 modelMatrix;
 };
 
-vertex Vertex vertex_func(constant Vertex *vertices [[buffer(0)]],
-                          constant Uniforms &uniforms [[buffer(1)]],
-                          uint vid [[vertex_id]]) {
-    float4x4 matrix = uniforms.modelMatrix;
-    Vertex in = vertices[vid];
-    Vertex out;
-    out.position = matrix * float4(in.position);
-    out.color = in.color;
+vertex VertexOut vertex_passthrough(device VertexIn *vertices [[buffer(0)]],
+                          uint vertexId [[vertex_id]]) {
+    VertexOut out;
+    out.position = vertices[vertexId].position;
+    out.color = vertices[vertexId].color;
     return out;
 }
 
-fragment float4 fragment_func(Vertex vert [[stage_in]]) {
-    return vert.color;
+fragment half4 fragment_passthrough(VertexOut fragmentIn [[stage_in]]) {
+    return half4(fragmentIn.color);
 }
