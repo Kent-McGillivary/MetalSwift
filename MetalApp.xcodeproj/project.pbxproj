@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D6147A84204A6D1D002907FF /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6147A83204A6D1D002907FF /* MetalKit.framework */; };
+		D670FB2B206C1F89003AF15E /* Mesh.swift in Sources */ = {isa = PBXBuildFile; fileRef = D670FB2A206C1F89003AF15E /* Mesh.swift */; };
 		D6A9EACB204B68FA008C0174 /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = D6A9EACA204B68FA008C0174 /* Shaders.metal */; };
 		D6A9EAD4204F9F5B008C0174 /* Renderer2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A9EAD3204F9F5B008C0174 /* Renderer2D.swift */; };
 		D6A9EAD62053A5F5008C0174 /* MathUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A9EAD52053A5F5008C0174 /* MathUtils.swift */; };
@@ -20,6 +21,7 @@
 
 /* Begin PBXFileReference section */
 		D6147A83204A6D1D002907FF /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
+		D670FB2A206C1F89003AF15E /* Mesh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mesh.swift; sourceTree = "<group>"; };
 		D6A9EACA204B68FA008C0174 /* Shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
 		D6A9EAD3204F9F5B008C0174 /* Renderer2D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer2D.swift; sourceTree = "<group>"; };
 		D6A9EAD52053A5F5008C0174 /* MathUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathUtils.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 				D6A9EAD3204F9F5B008C0174 /* Renderer2D.swift */,
 				D6A9EAD52053A5F5008C0174 /* MathUtils.swift */,
 				D6A9EAD720542929008C0174 /* Render3D.swift */,
+				D670FB2A206C1F89003AF15E /* Mesh.swift */,
 			);
 			path = MetalApp;
 			sourceTree = "<group>";
@@ -160,6 +163,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D6A9EACB204B68FA008C0174 /* Shaders.metal in Sources */,
+				D670FB2B206C1F89003AF15E /* Mesh.swift in Sources */,
 				D6F53AB32046709A0064100F /* ViewController.swift in Sources */,
 				D6A9EAD4204F9F5B008C0174 /* Renderer2D.swift in Sources */,
 				D6F53AB12046709A0064100F /* AppDelegate.swift in Sources */,
