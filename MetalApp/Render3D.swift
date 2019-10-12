@@ -100,7 +100,7 @@ class Renderer3D: NSObject, MTKViewDelegate {
     
     class func buildTexture(name: String, _ device: MTLDevice) throws -> MTLTexture {
         let textureLoader = MTKTextureLoader(device: device)
-        let asset = NSDataAsset.init(name: NSDataAsset.Name(rawValue: name))
+        let asset = NSDataAsset.init(name: name)
         if let data = asset?.data {
             return try textureLoader.newTexture(data: data, options: [:])
         } else {

@@ -24,7 +24,7 @@ class ViewController: NSViewController {
         -1.0, -1.0, 0.0,
         1.0, -1.0, 0.0]
     
-    let device = MTLCreateSystemDefaultDevice()!
+    var device: MTLDevice!
     var renderer: Renderer2D!
     var renderer3D: Renderer3D!
   
@@ -33,7 +33,9 @@ class ViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
+        device = MTLCreateSystemDefaultDevice()
+        
         mtkView.translatesAutoresizingMaskIntoConstraints = false
         mtkView.device = device
         //mtkView.colorPixelFormat = .bgra8Unorm
@@ -42,7 +44,7 @@ class ViewController: NSViewController {
         mtkView.sampleCount = 4
         // Clear to solid white
         //mtkView.clearColor = MTLClearColorMake(0, 0, 0, 1) //This sets the background.  With 0,0,0 it is black.  1,1,1 would be white.
-        mtkView.clearColor = MTLClearColorMake(1, 1, 1, 1)
+        mtkView.clearColor = MTLClearColorMake(0, 0, 0, 1)
         // Use a BGRA 8-bit normalized texture for the drawable
         mtkView.colorPixelFormat = .bgra8Unorm
         // Use a 32-bit depth buffer

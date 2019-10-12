@@ -17,7 +17,7 @@ import simd
 
 public class MathUtils {
     
-    static func matrix4x4_rotation(_ radians:Float,_ axis:float3)->matrix_float4x4 {
+    static func matrix4x4_rotation(_ radians:Float,_ axis:SIMD3<Float>)->matrix_float4x4 {
         let axisN = normalize(axis);
         let ct:Float = cosf(radians);
         let st:Float = sinf(radians);
@@ -35,14 +35,14 @@ public class MathUtils {
                                _ centerX:Float,_ centerY:Float,_ centerZ:Float,
                                _ upX:Float,_ upY:Float,_ upZ:Float)->matrix_float4x4
     {
-        let eye = float3(eyeX, eyeY, eyeZ);
-        let center = float3(centerX, centerY, centerZ);
-        let up = float3(upX, upY, upZ);
+        let eye = SIMD3<Float>.init(eyeX, eyeY, eyeZ);
+        let center = SIMD3<Float>.init(centerX, centerY, centerZ);
+        let up = SIMD3<Float>.init(upX, upY, upZ);
         
         let z = normalize(eye - center);
         let x = normalize(cross(up, z));
         let y = cross(z, x);
-        let t = float3(-dot(x, eye), -dot(y, eye), -dot(z, eye));
+        let t = SIMD3<Float>.init(-dot(x, eye), -dot(y, eye), -dot(z, eye));
         
         return matrix_float4x4([x.x, y.x,  z.x,  0],[x.y,y.y,z.y,0],[x.z,y.z,z.z,0],[t.x,t.y,t.z,1]);
     }

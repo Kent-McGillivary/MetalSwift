@@ -31,7 +31,7 @@ struct Uniforms {
     float4x4 modelMatrix;
 };
 
-vertex VertexOut vertex_passthrough(device VertexIn *vertices [[buffer(0)]],
+vertex VertexOut vertex_passthrough(const device VertexIn *vertices [[buffer(0)]],
                           uint vertexId [[vertex_id]]) {
     VertexOut out;
     out.position = vertices[vertexId].position;
@@ -61,7 +61,7 @@ struct VertexIn3D {
 
 
 
-vertex VertexOut3D vertex_transform(device VertexIn3D *vertices [[buffer(0)]],
+vertex VertexOut3D vertex_transform(const device VertexIn3D *vertices [[buffer(0)]],
                                   constant Constants &uniforms [[buffer(1)]],
                                   uint vertexId [[vertex_id]])
 {
