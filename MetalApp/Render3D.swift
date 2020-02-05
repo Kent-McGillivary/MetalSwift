@@ -20,8 +20,6 @@ struct Constants {
     var normalMatrix = matrix_identity_float3x3
 }
 
-
-
 class Renderer3D: NSObject, MTKViewDelegate {
     
     let view: MTKView
@@ -43,6 +41,8 @@ class Renderer3D: NSObject, MTKViewDelegate {
     var vertexData: [Float]?
     
     let renderPipelineState: MTLRenderPipelineState
+    
+    var isAnimate:Bool = true;
     
      init?(view: MTKView, device: MTLDevice) {
         self.view = view
@@ -83,7 +83,8 @@ class Renderer3D: NSObject, MTKViewDelegate {
         
         // Compile the functions and other state into a pipeline object.
         do {
-            renderPipelineState = try Renderer3D.buildRenderPipelineWithDevice(device, view: view)
+           renderPipelineState = try Renderer3D.buildRenderPipelineWithDevice(device, view: view)
+            //renderPipelineState = try Renderer3D.registerShaders(device, view: view)
         }
         catch {
             print("Unable to compile render pipeline state")
@@ -97,7 +98,10 @@ class Renderer3D: NSObject, MTKViewDelegate {
     }
     
    
-    
+    /**
+        Load a texture found in assets.
+     
+     */
     class func buildTexture(name: String, _ device: MTLDevice) throws -> MTLTexture {
         let textureLoader = MTKTextureLoader(device: device)
         let asset = NSDataAsset.init(name: name)
@@ -128,26 +132,6 @@ class Renderer3D: NSObject, MTKViewDelegate {
         desc.depthCompareFunction = compareFunc
         desc.isDepthWriteEnabled = isWriteEnabled
         return device.makeDepthStencilState(descriptor: desc)!
-    }
-    
-    class func registerShaders(_ device: MTLDevice, view: MTKView) throws -> MTLRenderPipelineState {
-        
-        // The default library contains all of the shader functions that were compiled into our app bundle
-        let library = device.makeDefaultLibrary()!
-        
-        // Retrieve the functions that will comprise our pipeline
-        let vertex_func = library.makeFunction(name: "vertex_passthrough")
-        let frag_func = library.makeFunction(name: "fragment_passthrough")
-        
-        // A render pipeline descriptor describes the configuration of our programmable pipeline
-        let pipelineDescriptor = MTLRenderPipelineDescriptor()
-        pipelineDescriptor.sampleCount = view.sampleCount
-        pipelineDescriptor.vertexFunction = vertex_func
-        pipelineDescriptor.fragmentFunction = frag_func
-        pipelineDescriptor.colorAttachments[0].pixelFormat = view.colorPixelFormat
-        pipelineDescriptor.depthAttachmentPixelFormat = view.depthStencilPixelFormat
-        
-        return try device.makeRenderPipelineState(descriptor: pipelineDescriptor)
     }
     
     class func buildRenderPipelineWithDevice(_ device: MTLDevice, view: MTKView) throws -> MTLRenderPipelineState {
@@ -208,9 +192,10 @@ class Renderer3D: NSObject, MTKViewDelegate {
     func render(_ view: MTKView) {
         // Our animation will be dependent on the frame time, so that regardless of how
         // fast we're animating, the speed of the transformations will be roughly constant.
-        let timestep = 1.0 / TimeInterval(view.preferredFramesPerSecond)
-        updateWithTimestep(timestep)
-        
+        if(self.isAnimate) {
+            let timestep = 1.0 / TimeInterval(view.preferredFramesPerSecond)
+            updateWithTimestep(timestep)
+        }
         // Our command buffer is a container for the work we want to perform with the GPU.
         if let commandBuffer = commandQueue.makeCommandBuffer() {
             
@@ -274,29 +259,6 @@ class Renderer3D: NSObject, MTKViewDelegate {
     func draw(in view: MTKView) {
         
         self.render(view)
-        
-        // Ask the view for a configured render pass descriptor. It will have a loadAction of
-        // MTLLoadActionClear and have the clear color of the drawable set to our desired clear color.
-        
-        /*if let commandBuffer = commandQueue.makeCommandBuffer(), let renderPassDescriptor = view.currentRenderPassDescriptor  {
-            
-            //Create a render encoder to clear the screen and draw our objects
-            if let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor:renderPassDescriptor) {
-                
-                renderEncoder.setRenderPipelineState(renderPipelineState)
-                renderEncoder.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
-                
-                renderEncoder.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: 3, instanceCount: 1)
-                
-                //We are finished with this render command encoder, so end it
-                renderEncoder.endEncoding()
-                if let drawable = view.currentDrawable {
-                    commandBuffer.present(drawable)
-                }
-                
-                commandBuffer.commit()
-            }
-        }*/
     }
     
     func makeOffscreenTargets(_ size: CGSize) {
@@ -322,6 +284,12 @@ class Renderer3D: NSObject, MTKViewDelegate {
         makeOffscreenTargets(size)
     }
     
+    
+    func is2d(is2dDrawing:Bool) {
+        self.isAnimate = !is2dDrawing;
+        print("IsAnimate")
+        print(self.isAnimate)
+    }
     
 }
 

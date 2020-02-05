@@ -19,7 +19,7 @@ import simd
 
 class ViewController: NSViewController {
     
-    let vertexData:[Float] = [
+    let vkertexData:[Float] = [
         0.0, 1.0, 0.0,
         -1.0, -1.0, 0.0,
         1.0, -1.0, 0.0]
@@ -54,6 +54,18 @@ class ViewController: NSViewController {
         renderer3D = Renderer3D(view: mtkView, device: device)
         //mtkView.delegate = renderer
         mtkView.delegate = renderer3D
+    }
+    
+    func setIs2D(is2d:Bool) {
+        if(is2d) {
+             print("Is2d")
+           
+        } else {
+            print("Is3d")
+        }
+        
+        renderer3D.is2d(is2dDrawing:is2d);
+       
     }
     
     
