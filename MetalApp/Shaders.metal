@@ -60,6 +60,10 @@ struct VertexIn3D {
 };
 
 
+struct VertexInSimple {
+  float4 position [[ attribute(0) ]];
+};
+
 
 vertex VertexOut3D vertex_transform(const device VertexIn3D *vertices [[buffer(0)]],
                                   constant Constants &uniforms [[buffer(1)]],
@@ -93,4 +97,7 @@ fragment half4 fragment_lit_textured(VertexOut3D fragmentIn [[stage_in]],
     color += diffuseFactor * diffuseLightIntensity * surfaceColor;
     return half4(color, 1);
 }
+
+
+
 

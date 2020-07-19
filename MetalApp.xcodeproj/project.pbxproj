@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		D6147A84204A6D1D002907FF /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6147A83204A6D1D002907FF /* MetalKit.framework */; };
+		D620BC9D24C4FFA500B1236B /* MetalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D620BC9C24C4FFA500B1236B /* MetalView.swift */; };
+		D620BC9F24C5007A00B1236B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D620BC9E24C5007A00B1236B /* ContentView.swift */; };
+		D659CE52243AC91400E652B9 /* Tutorial.metal in Sources */ = {isa = PBXBuildFile; fileRef = D659CE51243AC91400E652B9 /* Tutorial.metal */; };
 		D670FB2B206C1F89003AF15E /* Mesh.swift in Sources */ = {isa = PBXBuildFile; fileRef = D670FB2A206C1F89003AF15E /* Mesh.swift */; };
 		D6726BCC23E7856900975CEB /* RenderWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6726BCB23E7856900975CEB /* RenderWindow.swift */; };
 		D6A9EACB204B68FA008C0174 /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = D6A9EACA204B68FA008C0174 /* Shaders.metal */; };
@@ -22,12 +25,15 @@
 
 /* Begin PBXFileReference section */
 		D6147A83204A6D1D002907FF /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
+		D620BC9C24C4FFA500B1236B /* MetalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetalView.swift; sourceTree = "<group>"; };
+		D620BC9E24C5007A00B1236B /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		D659CE51243AC91400E652B9 /* Tutorial.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Tutorial.metal; sourceTree = "<group>"; };
 		D670FB2A206C1F89003AF15E /* Mesh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mesh.swift; sourceTree = "<group>"; };
 		D6726BCB23E7856900975CEB /* RenderWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RenderWindow.swift; path = ../RenderWindow.swift; sourceTree = "<group>"; };
 		D6A9EACA204B68FA008C0174 /* Shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
 		D6A9EAD3204F9F5B008C0174 /* Renderer2D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer2D.swift; sourceTree = "<group>"; };
 		D6A9EAD52053A5F5008C0174 /* MathUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathUtils.swift; sourceTree = "<group>"; };
-		D6A9EAD720542929008C0174 /* Render3D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Render3D.swift; sourceTree = "<group>"; };
+		D6A9EAD720542929008C0174 /* Render3D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Render3D.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.dtrace; };
 		D6F53AAD2046709A0064100F /* MetalApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetalApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6F53AB02046709A0064100F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D6F53AB22046709A0064100F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -77,6 +83,8 @@
 		D6F53AAF2046709A0064100F /* MetalApp */ = {
 			isa = PBXGroup;
 			children = (
+				D620BC9E24C5007A00B1236B /* ContentView.swift */,
+				D620BC9C24C4FFA500B1236B /* MetalView.swift */,
 				D6726BCB23E7856900975CEB /* RenderWindow.swift */,
 				D6F53AB02046709A0064100F /* AppDelegate.swift */,
 				D6F53AB22046709A0064100F /* ViewController.swift */,
@@ -84,6 +92,7 @@
 				D6F53AB62046709A0064100F /* Main.storyboard */,
 				D6F53AB92046709A0064100F /* Info.plist */,
 				D6F53ABA2046709A0064100F /* MetalApp.entitlements */,
+				D659CE51243AC91400E652B9 /* Tutorial.metal */,
 				D6A9EACA204B68FA008C0174 /* Shaders.metal */,
 				D6A9EAD3204F9F5B008C0174 /* Renderer2D.swift */,
 				D6A9EAD52053A5F5008C0174 /* MathUtils.swift */,
@@ -166,6 +175,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D6A9EACB204B68FA008C0174 /* Shaders.metal in Sources */,
+				D620BC9F24C5007A00B1236B /* ContentView.swift in Sources */,
+				D659CE52243AC91400E652B9 /* Tutorial.metal in Sources */,
+				D620BC9D24C4FFA500B1236B /* MetalView.swift in Sources */,
 				D670FB2B206C1F89003AF15E /* Mesh.swift in Sources */,
 				D6F53AB32046709A0064100F /* ViewController.swift in Sources */,
 				D6A9EAD4204F9F5B008C0174 /* Renderer2D.swift in Sources */,
@@ -311,6 +323,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = MetalApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = Kent.MetalApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "MetalApp/MetalApp-Bridging-Header.h";
@@ -330,6 +343,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = MetalApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = Kent.MetalApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "MetalApp/MetalApp-Bridging-Header.h";
